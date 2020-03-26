@@ -4,20 +4,20 @@
 	<meta charset="utf-8">
 	<title>EDMATEC - Desenvolvimento web</title>
 	<link rel="stylesheet" href="css/estilo.css">
-	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
 </head>
 <body>
 	<section>
 		<aside id="aside">
 			<header>
 				<div id="logomarca">
-					<a href="index.html"><img src="img/edmatec.png"></a>
+					<a href=""><img src="img/edmatec.png" id="logo"></a>
 				</div>
 				<nav>
 					<ul>
-						<li><a href="desenvolvedor.html">desenvolvedor</a></li>
-						<li><a href="projetos">projetos realizados</a></li>
-						<li><a href="">contato</a></li>
+						<li><a href="" id="novPagDes">desenvolvedor</a></li>
+						<li><a href="" id="novPagPro">projetos realizados</a></li>
+						<li><a href="" id="novPagCon">contato</a></li>
 					</ul>
 				</nav>
 				<div id="redesSociais">
@@ -27,13 +27,14 @@
 				</div>
 			</header>
 		</aside>
-		<article>
+		<article id="tagArticle">
 			<figure id="dvslider">
 				<button class="btSlider1" onclick="troca(-1)"><</button>
 				<div class="dvload">
 					<div id="idComentario">
-						<h1>Título</h1>
-						<p>Lorem ipsum dui iaculis facilisis quam cras enim euismod duis ut ultrices luctus, fringilla nullam est sit lorem aenean ornare adipiscing condimentum tristique hendrerit. </p>
+						<h1 id="cardTitulo">Título</h1>
+						<p id="cardText"></p>
+						<button id="homeMaisInfo">Saiba mais</button>
 					</div>
 					<div id="dvbarra"></div>
 				</div>
