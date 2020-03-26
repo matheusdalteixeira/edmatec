@@ -1,9 +1,8 @@
 var imgs = [];
-var comentarios = {
-	h1: [],
-	p: []
-};
+var comentarios = ["Meu texto 1", "Meu texto 2", "Meu texto 3"];
+var comentariosTitulos = ["Desenvolvedor", "Projetos realizados", "Contato"];
 var slider;
+var startSlider;
 var imgAtual;
 var maxImg;
 var tmp;
@@ -12,12 +11,20 @@ var vtempo;
 var vbarra;
 var primeiroCarregamento = 0;
 var altura;
+var texto;
+var titulo;
+var novPagCon;
+var novPagDes;
+var novPagPro;
+var tagArticle;
 
 function preCarregamento(){
 	var s = 1;
-	for(i = 0; i < 2; i++){
+	for(i = 0; i < 3; i++){
 		imgs[i] = new Image();
 		imgs[i].src = "../modelosProntos/projeto"+s+".png";
+		if(i == 2)
+			imgs[i].src = "../modelosProntos/projeto"+s+".jpg";
 		s++;
 	}
 }
@@ -25,29 +32,31 @@ function preCarregamento(){
 function carregarImg(img){
 	slider.style.backgroundImage = "url('"+imgs[img].src+"')";
 	slider.style.backgroundRepeat= "no-repeat";
+	carregarTexto(img);
 }
 
-function preFileTexto(){
-	readerFileText = new FileReader();
-	reader.addEventListener("load",loadFilePage);
-	readerFileText.readAsText(input);
+function carregarTexto(img){
+	texto.innerHTML = comentarios[img];
+	titulo.innerHTML = comentariosTitulos[img];
 }
-
-function loadFilePage(){
-
-}
-
 
 function inicia(){
 	preCarregamento();
 	imgAtual = 0;
 	maxImg = imgs.length - 1;
-	altAside=document.getElementById("tagAside");
+	novPagDes = document.getElementById("novPagDes");
+	novPagPro = document.getElementById("novPagPro");
+	novPagCon = document.getElementById("novPagCon");
+	texto=document.getElementById("cardText");
+	titulo=document.getElementById("cardTitulo");
 	slider=document.getElementById("dvslider");
 	vbarra=document.getElementById("dvbarra");
 	carregarImg(imgAtual);
 	tempoTroca = 0;
 	anima();
+	novPagDes.addEventListener("click",cancelaSlider);
+	novPagPro.addEventListener("click",cancelaSlider);
+	novPagCon.addEventListener("click",cancelaSlider);
 }
 
 function troca(dir){
@@ -68,7 +77,16 @@ function anima(){
 	}
 	vtempo = tempoTroca/5;
 	vbarra.style.width = vtempo+"%";
-	window.requestAnimationFrame(anima);
+	startSlider = window.requestAnimationFrame(anima);
+}
+
+function cancelaSlider(evento){
+	alert(evento);
+	cancelAnimationFrame(startSlider);
+	evento.preventDefault();
+	//anima();
+	tagArticle = document.getElementById("tagArticle");
+	tagArticle.removeChild(slider);
 }
 
 window.addEventListener("load", inicia);
