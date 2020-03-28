@@ -19,7 +19,7 @@ section aside{
 	* gerar valor a partir da imagem
 	*/
 	float: left;
-	background: #03989e;
+	background: #eeac9e;
 	text-transform: uppercase;
 }
 section aside header{
@@ -28,8 +28,7 @@ section aside header{
 	margin: 20px 0;
 }
 section aside header #logomarca,
-section aside header nav,
-section aside header #redesSociais{
+section aside header nav{
 	width: 100%;
 	/*height;
 	* configurar a partir do javascriprt
@@ -38,27 +37,44 @@ section aside header #redesSociais{
 	display: block;
 	float: left;
 }
+section aside header #redesSociais{
+	width: 60%;
+	margin-left: 20%;
+	margin-top: 30px;
+	height: auto;
+	float: left;
+	display: block;
+}
 section aside header nav{
-	margin-bottom: 30px;
-	margin-top: -30px; 
+	margin-top: 10px; 
 }
 section aside header #logomarca a,
-section aside header nav ul,
-section aside header #redesSociais a{
+section aside header nav ul{
 	width: 60%;
 	margin-left: 20%;
 	display: block;
 	float: left;
 }
+section aside header #redesSociais a{
+	width: 30%;
+	height: auto;
+	float: left;
+	display: block;
+}
+#imgMeio{	
+	margin-left: 5%;
+	margin-right: 5%;
+}
 section aside header #logomarca a img,
 section aside header nav ul li,
-section aside header #logomarca a img{	
+section aside header #redesSociais a img{	
 	display: block;
 	float: left;
 }
 section aside header #logomarca a img{
-	width: 100%;
-	margin-top: -60px;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: -30px;
 }
 section aside header nav ul li{
 	width: 100%;
@@ -71,14 +87,12 @@ section aside header nav ul li a{
 	color: white;
 }
 section aside header nav ul li a:hover{
-	color: #2eb2ff;
+	color: #1f238f;
 	font-weight: 800;
 }
 section aside header #redesSociais a img{
-	width: 15%;
-	background-color: white;
-	border-radius: 25%;
-	/*margin-left: 10%;*/
+	width: 100%;
+	height: auto;
 }
 section article{
 	width: 1000px;
@@ -94,27 +108,30 @@ section article{
 	align-items: center;
 }
 .btSlider1{
-	background-image: linear-gradient(to right, #ccc, transparent 100%);
+	background-image: linear-gradient(to right, #eeac9e70, transparent 100%);
 	width: 30px;
 	height: 30%;
 	color: blue;
 	cursor: pointer;
-	outline: none;
 	margin: 0px;
-	border: none;
+	border: 4px solid #eeac9e50;
 	border-radius: 0 50px 50px 0;
 	font-weight: bolder;
 }
 .btSlider2{
-	background-image: linear-gradient(to left, #ccc, transparent 100%);
+	background-image: linear-gradient(to left, #eeac9e70, transparent 100%);
 	width: 30px;
 	height: 30%;
 	color: blue;
 	cursor: pointer;
-	outline: none;
 	margin: 0px;
+	border: 4px solid #eeac9e50;
 	border-radius: 50px 0 0 50px;
 	font-weight: bolder;
+}
+.btSlider1:hover, .btSlider2:hover{
+	border: 2px solid #eeac9e50;
+	outline: none;
 }
 .dvload{
 	width: 50%;
@@ -159,6 +176,12 @@ section article{
 	border-radius: 8%;
 	cursor: pointer;
 	color: #03989e;
+	font-size: 1em;
+	font-weight: 800;
+}
+#homeMaisInfo:hover{
+	color: #ccc;
+	background: #03989e;
 }
 #dvbarra{
 	width: 0%;
@@ -168,11 +191,18 @@ section article{
 	border-radius: 0 0 16px 16px;
 }
 section footer{
-	background: #2eb2ff;
+	background: #eeac9e70;
 }
 section footer p{
+	color: gray;
 	text-align: center;
 	font-weight: bold;
 	margin: 10px 0;
-	opacity: 70%;
+}
+section footer p a{
+	text-decoration: none;
+	color: gray;
+}
+section footer p a:hover{
+	color: #1f238f;
 }
