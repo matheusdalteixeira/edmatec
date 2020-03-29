@@ -1,3 +1,6 @@
+/*
+* Estilo geral
+*/
 *{
 	margin: 0;
 	padding: 0;
@@ -11,13 +14,35 @@ body, section, footer{
 	display: block;
 	float: left;
 }
+.coluna{
+	width: calc(50% - 18px);
+	height: auto;
+	margin: 0 9px;
+	padding: 20px;
+	background-color: #eeac9e99;
+	opacity: 99.9999%;
+	border-right: 3px solid gray;
+	border-bottom: 3px solid gray;
+	/*border-radius: 10%;*/
+	display: block;
+	float: left;
+	border-radius: 0 0 20px 0;
+}
+.colunaDes{
+	background: transparent;
+	/*border-left:none;
+	border-top: 2px solid #1f238f80;
+	border-right:none;
+	border-bottom: 2px solid #1f238f80;*/
+	border: none;
+	border-radius: 0;
+}
+/*
+* Estilo aside - página principal
+*/
 section aside{
 	width: calc(100% - 1000px);
 	height: 443px;
-	/*height;
-	* configurar a partir do javascriprt
-	* gerar valor a partir da imagem
-	*/
 	float: left;
 	background: #eeac9e;
 	text-transform: uppercase;
@@ -61,42 +86,46 @@ section aside header #redesSociais a{
 	float: left;
 	display: block;
 }
-#imgMeio{	
+#imgMeio{
 	margin-left: 5%;
 	margin-right: 5%;
 }
 section aside header #logomarca a img,
 section aside header nav ul li,
-section aside header #redesSociais a img{	
+section aside header #redesSociais a img{
 	display: block;
 	float: left;
 }
 section aside header #logomarca a img{
-	width: 80%;
-	margin-left: 10%;
-	margin-top: -30px;
+	width: 90%;
+	margin-left: 5%;
+	/*margin-top: -30px;*/
 }
 section aside header nav ul li{
 	width: 100%;
-	height: 40px;
+	height: 30px;
 	text-align: center;
-	padding: 5px 0;
+	padding: 0;
 }
 section aside header nav ul li a{
 	text-decoration: none;
 	color: white;
+	font-size: 0.8em;
 }
-section aside header nav ul li a:hover{
+/*section aside header nav ul li a:hover{
 	color: #1f238f;
 	font-weight: 800;
-}
+}*/
 section aside header #redesSociais a img{
 	width: 100%;
 	height: auto;
 }
+/*
+* Estilo article - página principal
+*/
 section article{
 	width: 1000px;
-	height: auto;
+	height: 443px;
 	display: block;
 	float: left;
 }
@@ -133,7 +162,7 @@ section article{
 	border: 2px solid #eeac9e50;
 	outline: none;
 }
-.dvload{
+#dvload{
 	width: 50%;
 	height: 50%;
 	margin: 0%;
@@ -162,8 +191,7 @@ section article{
 	height: 45%;
 	margin-left: 5%;
 	margin-bottom: 5%;
-	text-align: justify;
-	
+	text-align: justify;	
 }
 #homeMaisInfo{
 	display: block;
@@ -190,6 +218,18 @@ section article{
 	border: 1px solid gray;
 	border-radius: 0 0 16px 16px;
 }
+/*
+* Estilo aside - página des
+*/
+/*
+* Estilo aside - página pro
+*/
+/*
+* Estilo aside - página con
+*/
+/*
+* Estilo footer - página principal
+*/
 section footer{
 	background: #eeac9e70;
 }
