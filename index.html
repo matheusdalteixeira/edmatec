@@ -1,56 +1,199 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-	<meta charset="utf-8">
-	<title>EDMATEC - Desenvolvimento web</title>
-	<link rel="stylesheet" href="css/estilo.css">
-	<script type="text/javascript" src="js/home.js"></script>
+  <meta charset="UTF-8">
+  <title>Mini Sistema Web</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button, table {
+      width: 100%;
+      margin-top: 10px;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    td, th {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
 </head>
 <body>
-	<section>
-		<aside id="aside">
-			<header>
-				<div id="logomarca">
-					<a href=""><img src="img/edmatec.png" id="logo"></a>
-				</div>
-				<nav>
-					<ul>
-						<li><a href="" id="novPagDes">desenvolvedor</a></li>
-						<li><a href="" id="novPagPro">projetos</a></li>
-						<li><a href="" id="novPagCon">contato</a></li>
-					</ul>
-				</nav>
-				<div id="redesSociais">
-					<a href="https://api.whatsapp.com/send?phone=5583986095389"><img src="img/whats.png"></a>
-					<a href="" id="imgMeio"><img src="img/insta.png"></a>
-					<a href="https://www.messenger.com/t/matheus.dal.teixeira"><img src="img/face.png"></a>
-				</div>
-			</header>
-		</aside>
-		<article id="tagArticle">
-			<figure id="dvslider">
-				<button class="btSlider1" onclick="troca(-1)"><</button>
-				<div id="dvload">
-					<div id="idComentario">
-						<h1 id="cardTitulo">Título</h1>
-						<p id="cardText"></p>
-						<button id="homeMaisInfo">Saiba mais</button>
-					</div>
-					<div id="dvbarra"></div>
-				</div>
-				<button class="btSlider2" onclick="troca(1)">></button>
-			</figure>
-		</article>
-	</section>
-	<section>
-		<footer>
-			<div id="direitosAutorais">
-				<p>EDMATEC - @2020</p>
-			</div>
-			<div id="infoLegais">
-				<p><a href="termosUso.html">Termos de uso</a> | <a href="politicasPrivacidade.html">Políticas de privacidade</a></p>
-			</div>
-		</footer>
-	</section>
+  <div id="login" class="container">
+    <h2>Login</h2>
+    <input type="text" id="loginUser" placeholder="Usuário">
+    <input type="password" id="loginPass" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <p><a href="#" onclick="showScreen('register')">Cadastrar</a> | <a href="#" onclick="showScreen('forgot')">Esqueci a senha</a></p>
+  </div>
+
+  <div id="register" class="container hidden">
+    <h2>Cadastro</h2>
+    <input type="text" id="regUser" placeholder="Usuário">
+    <input type="password" id="regPass" placeholder="Senha">
+    <input type="email" id="regEmail" placeholder="Email">
+    <button onclick="register()">Cadastrar</button>
+    <p><a href="#" onclick="showScreen('login')">Voltar</a></p>
+  </div>
+
+  <div id="forgot" class="container hidden">
+    <h2>Recuperar Senha</h2>
+    <input type="email" id="forgotEmail" placeholder="Informe seu email">
+    <button onclick="recoverPassword()">Recuperar</button>
+    <p><a href="#" onclick="showScreen('login')">Voltar</a></p>
+  </div>
+
+  <div id="dashboard" class="container hidden">
+    <div class="actions">
+      <h2>Minha Planilha</h2>
+      <button onclick="logout()">Sair</button>
+    </div>
+    <table id="spreadsheet">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody id="sheetBody">
+        <!-- Linhas inseridas dinamicamente -->
+      </tbody>
+    </table>
+    <button onclick="addRow()">Adicionar Linha</button>
+    <button onclick="saveSheet()">Salvar</button>
+  </div>
+
+  <script>
+    const usersKey = 'users_data';
+    const sheetKeyPrefix = 'sheet_';
+    let currentUser = null;
+
+    function showScreen(screen) {
+      ['login', 'register', 'forgot', 'dashboard'].forEach(id =>
+        document.getElementById(id).classList.add('hidden'));
+      document.getElementById(screen).classList.remove('hidden');
+    }
+
+    function getUsers() {
+      return JSON.parse(localStorage.getItem(usersKey)) || {};
+    }
+
+    function setUsers(users) {
+      localStorage.setItem(usersKey, JSON.stringify(users));
+    }
+
+    function register() {
+      const user = document.getElementById('regUser').value;
+      const pass = document.getElementById('regPass').value;
+      const email = document.getElementById('regEmail').value;
+      const users = getUsers();
+
+      if (users[user]) {
+        alert("Usuário já existe.");
+        return;
+      }
+
+      users[user] = { password: pass, email: email };
+      setUsers(users);
+      alert("Cadastro realizado com sucesso!");
+      showScreen('login');
+    }
+
+    function login() {
+      const user = document.getElementById('loginUser').value;
+      const pass = document.getElementById('loginPass').value;
+      const users = getUsers();
+
+      if (users[user] && users[user].password === pass) {
+        currentUser = user;
+        showScreen('dashboard');
+        loadSheet();
+      } else {
+        alert("Usuário ou senha inválidos.");
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      showScreen('login');
+    }
+
+    function recoverPassword() {
+      const email = document.getElementById('forgotEmail').value;
+      const users = getUsers();
+      let found = false;
+
+      for (let u in users) {
+        if (users[u].email === email) {
+          alert("Senha para o usuário '" + u + "': " + users[u].password);
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) alert("Email não encontrado.");
+    }
+
+    function addRow() {
+      const tbody = document.getElementById('sheetBody');
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    function saveSheet() {
+      const rows = document.querySelectorAll('#sheetBody tr');
+      const data = [];
+
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        data.push([cells[0].innerText, cells[1].innerText]);
+      });
+
+      localStorage.setItem(sheetKeyPrefix + currentUser, JSON.stringify(data));
+      alert("Planilha salva!");
+    }
+
+    function loadSheet() {
+      const data = JSON.parse(localStorage.getItem(sheetKeyPrefix + currentUser)) || [];
+      const tbody = document.getElementById('sheetBody');
+      tbody.innerHTML = '';
+
+      data.forEach(([item, valor]) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td contenteditable="true">${item}</td>
+          <td contenteditable="true">${valor}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // Iniciar na tela de login
+    showScreen('login');
+  </script>
 </body>
 </html>
