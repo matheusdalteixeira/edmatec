@@ -1,199 +1,129 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Mini Sistema Web</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Leveza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
+      background: #fff8f0;
+      color: #333;
+      line-height: 1.6;
       padding: 20px;
     }
-    .hidden {
-      display: none;
-    }
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    input, button, table {
-      width: 100%;
-      margin-top: 10px;
-    }
-    table {
-      border-collapse: collapse;
-    }
-    td, th {
-      border: 1px solid #ccc;
-      padding: 8px;
+
+    header {
+      background: #fcebd5;
+      padding: 40px 20px;
       text-align: center;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .actions {
-      display: flex;
-      justify-content: space-between;
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #5c4b51;
+    }
+
+    nav {
+      margin-top: 15px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #8c6f74;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    article {
+      background: #ffffff;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    article h2 {
+      color: #6d5d5d;
+      margin-bottom: 10px;
+    }
+
+    article p {
+      font-size: 1.1rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #a89c9c;
     }
   </style>
 </head>
 <body>
-  <div id="login" class="container">
-    <h2>Login</h2>
-    <input type="text" id="loginUser" placeholder="Usuário">
-    <input type="password" id="loginPass" placeholder="Senha">
-    <button onclick="login()">Entrar</button>
-    <p><a href="#" onclick="showScreen('register')">Cadastrar</a> | <a href="#" onclick="showScreen('forgot')">Esqueci a senha</a></p>
-  </div>
+  <header>
+    <h1>Blog Leveza</h1>
+    <nav>
+      <a href="#autoconhecimento">Autoconhecimento</a>
+      <a href="#viagens">Viagens</a>
+      <a href="#espiritualidade">Espiritualidade</a>
+    </nav>
+  </header>
 
-  <div id="register" class="container hidden">
-    <h2>Cadastro</h2>
-    <input type="text" id="regUser" placeholder="Usuário">
-    <input type="password" id="regPass" placeholder="Senha">
-    <input type="email" id="regEmail" placeholder="Email">
-    <button onclick="register()">Cadastrar</button>
-    <p><a href="#" onclick="showScreen('login')">Voltar</a></p>
-  </div>
+  <main>
+    <article id="autoconhecimento">
+      <h2>Explorando o Eu Interior</h2>
+      <p>
+        O autoconhecimento é a chave para uma vida mais leve e significativa. Ao voltarmos nosso olhar para dentro, descobrimos nossos verdadeiros desejos e aprendemos a viver com mais propósito.
+      </p>
+    </article>
 
-  <div id="forgot" class="container hidden">
-    <h2>Recuperar Senha</h2>
-    <input type="email" id="forgotEmail" placeholder="Informe seu email">
-    <button onclick="recoverPassword()">Recuperar</button>
-    <p><a href="#" onclick="showScreen('login')">Voltar</a></p>
-  </div>
+    <article id="viagens">
+      <h2>Jornadas pelo Mundo</h2>
+      <p>
+        Viajar é uma forma poderosa de expandir a mente e o coração. Cada lugar carrega uma energia única que nos transforma de maneiras sutis e profundas.
+      </p>
+    </article>
 
-  <div id="dashboard" class="container hidden">
-    <div class="actions">
-      <h2>Minha Planilha</h2>
-      <button onclick="logout()">Sair</button>
-    </div>
-    <table id="spreadsheet">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Valor</th>
-        </tr>
-      </thead>
-      <tbody id="sheetBody">
-        <!-- Linhas inseridas dinamicamente -->
-      </tbody>
-    </table>
-    <button onclick="addRow()">Adicionar Linha</button>
-    <button onclick="saveSheet()">Salvar</button>
-  </div>
+    <article id="espiritualidade">
+      <h2>Conexão com o Sagrado</h2>
+      <p>
+        A espiritualidade nos oferece um espaço de paz e reconexão com algo maior. Seja por meio da meditação, oração ou contemplação, ela nos ajuda a reencontrar o equilíbrio.
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Blog Leveza. Feito com carinho e boas energias.</p>
+  </footer>
 
   <script>
-    const usersKey = 'users_data';
-    const sheetKeyPrefix = 'sheet_';
-    let currentUser = null;
-
-    function showScreen(screen) {
-      ['login', 'register', 'forgot', 'dashboard'].forEach(id =>
-        document.getElementById(id).classList.add('hidden'));
-      document.getElementById(screen).classList.remove('hidden');
-    }
-
-    function getUsers() {
-      return JSON.parse(localStorage.getItem(usersKey)) || {};
-    }
-
-    function setUsers(users) {
-      localStorage.setItem(usersKey, JSON.stringify(users));
-    }
-
-    function register() {
-      const user = document.getElementById('regUser').value;
-      const pass = document.getElementById('regPass').value;
-      const email = document.getElementById('regEmail').value;
-      const users = getUsers();
-
-      if (users[user]) {
-        alert("Usuário já existe.");
-        return;
-      }
-
-      users[user] = { password: pass, email: email };
-      setUsers(users);
-      alert("Cadastro realizado com sucesso!");
-      showScreen('login');
-    }
-
-    function login() {
-      const user = document.getElementById('loginUser').value;
-      const pass = document.getElementById('loginPass').value;
-      const users = getUsers();
-
-      if (users[user] && users[user].password === pass) {
-        currentUser = user;
-        showScreen('dashboard');
-        loadSheet();
-      } else {
-        alert("Usuário ou senha inválidos.");
-      }
-    }
-
-    function logout() {
-      currentUser = null;
-      showScreen('login');
-    }
-
-    function recoverPassword() {
-      const email = document.getElementById('forgotEmail').value;
-      const users = getUsers();
-      let found = false;
-
-      for (let u in users) {
-        if (users[u].email === email) {
-          alert("Senha para o usuário '" + u + "': " + users[u].password);
-          found = true;
-          break;
-        }
-      }
-
-      if (!found) alert("Email não encontrado.");
-    }
-
-    function addRow() {
-      const tbody = document.getElementById('sheetBody');
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-      `;
-      tbody.appendChild(row);
-    }
-
-    function saveSheet() {
-      const rows = document.querySelectorAll('#sheetBody tr');
-      const data = [];
-
-      rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        data.push([cells[0].innerText, cells[1].innerText]);
+    // Scroll suave para as seções
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        window.scrollTo({
+          top: target.offsetTop - 20,
+          behavior: 'smooth'
+        });
       });
-
-      localStorage.setItem(sheetKeyPrefix + currentUser, JSON.stringify(data));
-      alert("Planilha salva!");
-    }
-
-    function loadSheet() {
-      const data = JSON.parse(localStorage.getItem(sheetKeyPrefix + currentUser)) || [];
-      const tbody = document.getElementById('sheetBody');
-      tbody.innerHTML = '';
-
-      data.forEach(([item, valor]) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td contenteditable="true">${item}</td>
-          <td contenteditable="true">${valor}</td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
-
-    // Iniciar na tela de login
-    showScreen('login');
+    });
   </script>
 </body>
 </html>
