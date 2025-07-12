@@ -105,6 +105,11 @@
         A espiritualidade nos oferece um espaço de paz e reconexão com algo maior. Seja por meio da meditação, oração ou contemplação, ela nos ajuda a reencontrar o equilíbrio.
       </p>
     </article>
+
+    <article>
+      <h2>função arquivos_e_pastas</h2>
+      <input type="file" name="f1" id="arquivos_e_pastas">
+    </article>
   </main>
 
   <footer>
@@ -124,6 +129,19 @@
         // });
       // });
     // });
+  const input = document.getElementById('arquivos_e_pastas');
+
+  input.addEventListener('change', (event) => {
+    const arquivo = event.target.files[0];
+    const leitor = new FileReader();
+
+    leitor.onload = (e) => {
+      const conteudo = e.target.result;
+      console.log(conteudo); // Faça algo com o conteúdo do arquivo
+    };
+
+    leitor.readAsText(arquivo);
+  });
   </script>
 </body>
 </html>
