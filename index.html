@@ -108,7 +108,8 @@
 
     <article>
       <h2>função arquivos_e_pastas</h2>
-      <input type="file" name="f1" id="arquivos_e_pastas">
+      <input type="text" id="meuInput">
+      <button onclick="salvarConteudo()">Salvar</button>
     </article>
   </main>
 
@@ -129,19 +130,32 @@
         // });
       // });
     // });
-  const input = document.getElementById('arquivos_e_pastas');
+  function salvarConteudo() {
+    const inputElement = document.getElementById("meuInput");
+    const texto = inputElement.value;
+    const nomeArquivo = "meuArquivo.txt";
+    const tipoArquivo = "text/plain";
 
-  input.addEventListener('change', (event) => {
-    const arquivo = event.target.files[0];
-    const leitor = new FileReader();
+    download(texto, nomeArquivo, tipoArquivo);
+  }
 
-    leitor.onload = (e) => {
-      const conteudo = e.target.result;
-      console.log(conteudo); // Faça algo com o conteúdo do arquivo
-    };
-
-    leitor.readAsText(arquivo);
-  });
+  function download(data, filename, type) {
+    const file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(file, filename);
+    } else {
+      const a = document.createElement("a");
+      const url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 0);
+    }
+  }
   </script>
 </body>
 </html>
