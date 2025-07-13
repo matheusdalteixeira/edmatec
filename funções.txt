@@ -1,0 +1,10 @@
+apaga_arquivo.php
+arquivos_e_pastas.php
+atualiza_loc_exe_pasta.php
+busca_array_string.php
+copia_arquivo.php
+exibi_conteudo_arr.php
+input_term.php
+rep_add_arr.php
+valida_seq_tipo.php
+vars.php
