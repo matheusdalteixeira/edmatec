@@ -41,8 +41,6 @@
 
     $pastas_abertas = [];
 
-    $pastas_e_arquivos = [];
-
     $v_vars = [];
 
     $t_vars = [];
