@@ -6,7 +6,7 @@
 			
 			$a = -1;
 			
-			do $temp = readline(PHP_EOL.$p1) while($temp > $p2);
+			do $temp = readline(PHP_EOL.$p1) while($temp > $p2 || $temp < 0);
 
 			return $temp;
 			
