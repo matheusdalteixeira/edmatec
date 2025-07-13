@@ -5,11 +5,11 @@
 
 	    global $v_vars, $t_vars;
 
-	    $v_vars = [$p];
+	    $v_vars = [];
 
-	    $t_vars = ["string"];
+	    $t_vars = [];
 
-		if(valida_seq_tipo($v_vars,$t_vars)){
+		if(valida_seq_tipo([$p],["string"])){
 
 			$diretorio = dir($p);
 
