@@ -95,8 +95,8 @@
     $cor_bg['light_gray']     = "\033[47m";
 
 
-    $pad_teste_tipo = [];
+    // $pad_teste_tipo = [];
 
-    $pad_teste_tipo["fun_valida_seq_tipo"] = file_get_contents("pad_fun_valida_seq_tipo.txt");
+    // $pad_teste_tipo["fun_valida_seq_tipo"] = file_get_contents("pad_fun_valida_seq_tipo.txt");
 
 ?>
