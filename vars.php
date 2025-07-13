@@ -27,12 +27,8 @@
 
     $cont_tempo = 0;
 
-    $pad_nome_arqs = ["questao.txt", "resposta.tsv","detalhes.tsv"];
 
-
-    $pad_dados_arqs = [];
-
-    $pad_dados_arqs["detalhes"] = file_get_contents("pad_dados_arqs_detalhes.tsv");
+    $pad_estrutura_sistema = file_get_contents("pad_estrutura_sistema.tsv");
 
 
     $path = getcwd();
@@ -95,8 +91,8 @@
     $cor_bg['light_gray']     = "\033[47m";
 
 
-    // $pad_teste_tipo = [];
+    $pad_teste_tipo = [];
 
-    // $pad_teste_tipo["fun_valida_seq_tipo"] = file_get_contents("pad_fun_valida_seq_tipo.txt");
+    $pad_teste_tipo["fun_valida_seq_tipo"] = file_get_contents("pad_fun_valida_seq_tipo.txt");
 
 ?>
