@@ -28,9 +28,6 @@
     $cont_tempo = 0;
 
 
-    $pad_estrutura_sistema = file_get_contents("pad_estrutura_sistema.tsv");
-
-
     $path = getcwd();
 
     $pasta_atual = "";
@@ -42,7 +39,7 @@
     $t_vars = [];
 
 
-	$cor_reset = "\033[0m";
+    $cor_reset = "\033[0m";
 
     $cor_texto = array();
 
@@ -89,10 +86,5 @@
     $cor_bg['cyan']        = "\033[46m";
 
     $cor_bg['light_gray']     = "\033[47m";
-
-
-    $pad_teste_tipo = [];
-
-    $pad_teste_tipo["fun_valida_seq_tipo"] = file_get_contents("pad_fun_valida_seq_tipo.txt");
 
 ?>
